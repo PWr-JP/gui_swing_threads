@@ -12,7 +12,7 @@ public class MainWindow extends JFrame {
     public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
             try {
-                MainWindow window = new MainWindow();
+                MainWindow window = new MainWindow("Wątki");
                 window.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace(System.err);
@@ -46,9 +46,11 @@ public class MainWindow extends JFrame {
      * metoda nie robi nic, ale za to długo
      */
     private void doWork() {
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < Integer.MAX_VALUE; j++)
                 for (int k = 0; k < Integer.MAX_VALUE; k++)
                     ;
+        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 }
