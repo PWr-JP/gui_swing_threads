@@ -37,7 +37,15 @@ public class MainWindow extends JFrame {
         menuBar.add(mnDo);
 
         JMenuItem mnitDo = new JMenuItem("Work");
-        mnitDo.addActionListener(e -> doWork());
+        mnitDo.addActionListener(e -> {
+            new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    doWork();
+                    return null;
+                }
+            }.execute();
+        });
         mnDo.add(mnitDo);
 
     }
