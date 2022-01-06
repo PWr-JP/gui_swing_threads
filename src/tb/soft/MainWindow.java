@@ -2,13 +2,16 @@ package tb.soft;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * klasa główna zawierająca metodę statyczną main
  */
 public class MainWindow extends JFrame {
+
+    private ProgressMonitor progressMonitor =
+            new ProgressMonitor(MainWindow.this,"Running",
+            "% of done",0,100);
+
     public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
             try {
@@ -38,6 +41,7 @@ public class MainWindow extends JFrame {
 
         JMenuItem mnitDo = new JMenuItem("Work");
         mnitDo.addActionListener(e -> {
+            progressMonitor.setProgress(0);
             new SwingWorker<Void, Void>() {
                 @Override
                 protected Void doInBackground() throws Exception {
@@ -54,11 +58,15 @@ public class MainWindow extends JFrame {
      * metoda nie robi nic, ale za to długo
      */
     private void doWork() {
+        System.out.println("start");
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++) {
+            progressMonitor.setProgress(20*i);
             for (int j = 0; j < Integer.MAX_VALUE; j++)
                 for (int k = 0; k < Integer.MAX_VALUE; k++)
                     ;
+        }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        System.out.println("stop");
     }
 }
