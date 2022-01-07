@@ -42,13 +42,13 @@ public class MainWindow extends JFrame {
         JMenuItem mnitDo = new JMenuItem("Work");
         mnitDo.addActionListener(e -> {
             progressMonitor.setProgress(0);
-            new SwingWorker<Void, Void>() {
+            new Thread() {
                 @Override
-                protected Void doInBackground() throws Exception {
+                public void run() {
                     doWork();
-                    return null;
                 }
-            }.execute();
+            }.run(); //??!
+
         });
         mnDo.add(mnitDo);
 
