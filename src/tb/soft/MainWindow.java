@@ -58,15 +58,18 @@ public class MainWindow extends JFrame {
      * metoda nie robi nic, ale za to długo
      */
     private void doWork() {
-        System.out.println("start");
+        final int cnt = 10;
+//        System.out.println("start");
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        for (int i = 0; i < 6; i++) {
-            progressMonitor.setProgress(20*i);
-            for (int j = 0; j < Integer.MAX_VALUE; j++)
-                for (int k = 0; k < Integer.MAX_VALUE; k++)
-                    ;
+        for (int i = 0; i <= cnt; i++) {
+            progressMonitor.setProgress(100*i /cnt);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        System.out.println("stop");
+//        System.out.println("stop");
     }
 }
