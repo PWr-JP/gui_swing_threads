@@ -47,7 +47,7 @@ public class MainWindow extends JFrame {
                 public void run() {
                     doWork();
                 }
-            }.run(); //??!
+            }.start();
 
         });
         mnDo.add(mnitDo);
@@ -61,13 +61,13 @@ public class MainWindow extends JFrame {
         final int cnt = 10;
 //        System.out.println("start");
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        for (int i = 0; i <= cnt; i++) {
-            progressMonitor.setProgress(100*i /cnt);
+        for (int i = 0; i < cnt; i++) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            progressMonitor.setProgress(100*(i+1) /cnt);
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 //        System.out.println("stop");
